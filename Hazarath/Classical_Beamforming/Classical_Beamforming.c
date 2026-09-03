@@ -1,8 +1,21 @@
+/*
+ * Delay-and-Sum Beamforming:
+ * Combines signals received from multiple antenna elements after
+ * applying direction-dependent phase shifts. The beamformer scans
+ * across the specified angle range and selects the angle with the
+ * maximum response as the estimated angle of arrival.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <complex.h>
 #include <math.h>
 
+/*
+ * Generates the steering vector for the given angle.
+ * The steering vector provides the phase shift required for
+ * each antenna element during beamforming.
+ */
 void steering_vector(double Angle_rad, int Antenna_numbers,
                      double Antenna_dist, double complex *v)
 {
@@ -13,6 +26,11 @@ void steering_vector(double Angle_rad, int Antenna_numbers,
     }
 }
 
+/*
+ * Performs Delay-and-Sum beamforming over the specified angle range.
+ * For each angle, the antenna signals are phase-aligned and summed.
+ * The angle with the maximum response is selected as the angle of arrival.
+ */
 double Delay_and_Sum_Beamforming(int num_samples, int Antenna_numbers,
                                  double Antenna_dist, double Min_Angle,
                                  double Max_Angle, double Angle_sum,
